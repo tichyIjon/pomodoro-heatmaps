@@ -106,7 +106,6 @@ function save() {
 }
 
 // functions to load data from browser localStorage
-
 function colorOnLoad(columnsUncoloredDivs) {
     let columnKey;
     for (let i = 0; i <= 30; i++ ) {
@@ -129,6 +128,11 @@ function load() {
 
     colorOnLoad(columnsUncoloredDivs)
     alert('data loaded from localStorage')
+}
+
+// fullscreen option
+function goFullscreen() {
+    document.body.requestFullscreen();
 }
 
 
@@ -161,7 +165,8 @@ document.addEventListener('keydown',(event)=> {
         alert('data saved to localStorage')
         save()
     } else if (event.key === 'l') {
-        load()
-        
-    }
+        load()   
+    } else if (event.key === 'f') {
+        goFullscreen()
+    } 
 })

@@ -62,28 +62,24 @@ body {
     align-items: center;
 }
 
-.yAxis {
-    border: 3px solid red;
-    margin-bottom: 90px;
-}
-
 .list-yAxis {
     display: flex;
     flex-direction: column;
     list-style-type: none;
 }
 
-.yAxis-title {
-    border: 3px solid black;
-    transform: rotate(-90deg);
-    height: 30px;
-    margin-right: -50px;
-}
-
 .xAxis-title {
     display: flex;
     justify-content: center;
-    border: 3px solid black;
+    margin-top: 20px;
+}
+
+.coding-hours {
+    margin-top: 20px;
+}
+
+footer {
+    margin: 20px;
 }
 
 /* block colors */

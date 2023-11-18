@@ -36,16 +36,6 @@ let currentMonth = new Date().getMonth()
 let currentYear = new Date().getFullYear()
 xAxisLabel.textContent = `days of ${currentMonth}/${currentYear}`
 
-// yAxis label generation
-let listYaxis = document.querySelector('.list-yAxis')
-for (let i = 25; i > 0; i -= 1) {
-  let li = document.createElement('li')
-  li.setAttribute('class',`list-item li${i}`)
-  li.setAttribute('style',`width: ${sqrWidth}px; height: ${sqrHeight}px;`)
-  li.textContent = `${i}`
-  listYaxis.append(li)
-}
-
 // function for column selecting
 function selectColumn(column) {
     let upperBound = column + 721; 

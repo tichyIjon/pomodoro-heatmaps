@@ -30,12 +30,6 @@ for (let i = 1; i <= 30; i++) {
   list.append(li)
 }
 
-// current month label generation
-let xAxisLabel = document.querySelector('.xAxis-title') 
-let currentMonth = new Date().getMonth()
-let currentYear = new Date().getFullYear()
-xAxisLabel.textContent = `days of ${currentMonth}/${currentYear}`
-
 // function for column selecting
 function selectColumn(column) {
     let upperBound = column + 721; 
@@ -196,6 +190,11 @@ function goFullscreen() {
     document.body.requestFullscreen();
 }
 
+// clear grid function
+function gridClear() {
+    document. location. reload() 
+}
+
 
 // keyboard controls
 let selectedColumn = -1;
@@ -227,5 +226,7 @@ document.addEventListener('keydown',(event)=> {
         load()   
     } else if (event.key === 'f') {
         goFullscreen()
-    } 
+    } else if (event.key === 'c') {
+        gridClear()
+    }
 })

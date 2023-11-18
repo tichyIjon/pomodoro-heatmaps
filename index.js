@@ -1,5 +1,10 @@
 let cnt1 = document.querySelector('.container1');
 
+// color variables
+
+let columnSelectorColor = 'red'
+let gridLinesColor = 'black'
+
 // grid dimensions
 let contHeight = 700;
 let contWidth = 1600;
@@ -47,12 +52,12 @@ function selectColumn(column) {
 
     for (let i = 0; i < 750; i ++) {
       let sqr = document.querySelector(`.sqr${i}`) 
-      sqr.style.border = '1px dotted black';
+      sqr.style.border = `1px dotted ${gridLinesColor}`;
     }
 
     for (let i = column; i <= upperBound; i += 30) {
       let sqr = document.querySelector(`.sqr${i}`)
-      sqr.style.border = '2px dotted red';
+      sqr.style.border = `1px solid ${columnSelectorColor}`;
     }
 }
 
@@ -79,12 +84,25 @@ function uncolorDiv(column, columnsUncoloredDivs) {
 function colorDiv(column, columnsUncoloredDivs) {
     if (column >= 0 && column < 30) {
         let columnKey = `column${column}UnColoredDivs`;
-
         if (columnsUncoloredDivs[columnKey] > 0) {
             let lowestDivIndex = column + (30 * columnsUncoloredDivs[columnKey]) - 30;
             columnsUncoloredDivs[columnKey] -= 1;
             let sqr = document.querySelector(`.sqr${lowestDivIndex}`);
-            sqr.style.backgroundColor = 'coral';
+            if (columnsUncoloredDivs[columnKey] >= 21 && columnsUncoloredDivs[columnKey] <= 25) {
+                sqr.classList.add('blockColor')
+            } else if (columnsUncoloredDivs[columnKey] >= 17 && columnsUncoloredDivs[columnKey] <= 21) {
+                sqr.classList.add('blockColor1')
+            } else if (columnsUncoloredDivs[columnKey] >= 13 && columnsUncoloredDivs[columnKey] <= 17) {
+                sqr.classList.add('blockColor2')
+            } else if (columnsUncoloredDivs[columnKey] >= 9 && columnsUncoloredDivs[columnKey] <= 13) {
+                sqr.classList.add('blockColor3')
+            } else if (columnsUncoloredDivs[columnKey] >= 5 && columnsUncoloredDivs[columnKey] <= 9) {
+                sqr.classList.add('blockColor4')
+            } else if (columnsUncoloredDivs[columnKey] >= 1 && columnsUncoloredDivs[columnKey] <= 5) {
+                sqr.classList.add('blockColor5')
+            } else if (columnsUncoloredDivs[columnKey] < 1) {
+                sqr.classList.add('blockColor6')
+            }
             totalPomodoros += 1;
         }
     }
@@ -99,25 +117,74 @@ function calculateHours() {
 }
 
 // function to save data in browser localStorage
+let colorLog = {}
 function save() {
+
+    for (let i = 0; i <= 750; i++) {
+        if($(`.sqr${i}`).hasClass('blockColor')) {
+            colorLog[`.sqr${i}`] = "blockColor";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor1')) {
+            colorLog[`.sqr${i}`] = "blockColor1";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor2')) {
+            colorLog[`.sqr${i}`] = "blockColor2";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor3')) {
+            colorLog[`.sqr${i}`] = "blockColor3";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor4')) {
+            colorLog[`.sqr${i}`] = "blockColor4";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor5')) {
+            colorLog[`.sqr${i}`] = "blockColor5";
+
+        } else if ($(`.sqr${i}`).hasClass('blockColor6')) {
+            colorLog[`.sqr${i}`] = "blockColor6";
+
+        }
+    }
+
+    let colorLog_serialized = JSON.stringify(colorLog)
+    localStorage.setItem('colorLog',colorLog_serialized)
+
     let columnsUncoloredDivs_serialized = JSON.stringify(columnsUncoloredDivs)
     localStorage.setItem('columnsUncoloredDivs',columnsUncoloredDivs_serialized)
+
     console.log('data saved to localStorage')
 }
 
 // functions to load data from browser localStorage
-function colorOnLoad(columnsUncoloredDivs) {
-    let columnKey;
-    for (let i = 0; i <= 30; i++ ) {
-        columnKey = `column${i}UnColoredDivs`
-        if (columnsUncoloredDivs[columnKey] !== 25) {
-            let lowestColoredDivIndex = i + 720;
-            let highestColoredDivIndex = lowestColoredDivIndex - ((24 - columnsUncoloredDivs[columnKey]) * 30)
-            for (let i = highestColoredDivIndex; i <= lowestColoredDivIndex; i += 30) {
-                let sqr = document.querySelector(`.sqr${i}`);
-                sqr.style.backgroundColor = 'coral';
-                totalPomodoros += 1;
-            }
+function colorOnLoad() {
+    for (let i = 0; i < 750; i++) {
+
+        if (colorLog[`.sqr${i}`] === 'blockColor') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor1') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor1')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor2') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor2')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor3') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor3')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor4') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor4')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor5') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor5')
+
+        } else if (colorLog[`.sqr${i}`] === 'blockColor6') {
+            let sqr = document.querySelector(`.sqr${i}`)
+            sqr.classList.add('blockColor6')
         }
     }
 }
@@ -126,7 +193,10 @@ function load() {
     let columnsUncoloredDivs_deserialized = JSON.parse(localStorage.getItem('columnsUncoloredDivs'))
     columnsUncoloredDivs = columnsUncoloredDivs_deserialized
 
-    colorOnLoad(columnsUncoloredDivs)
+    let colorLog_deserialized = JSON.parse(localStorage.getItem('colorLog'))
+    colorLog = colorLog_deserialized
+
+    colorOnLoad()
     alert('data loaded from localStorage')
 }
 
@@ -155,12 +225,10 @@ document.addEventListener('keydown',(event)=> {
             colorDiv(selectedColumn, columnsUncoloredDivs);
             calculateHours()
         }
-        save()
     } else if (event.key === 'Backspace') {
       if (selectedColumn !== -1) {
           uncolorDiv(selectedColumn, columnsUncoloredDivs);
       }
-      save()
     } else if (event.key === 's') {
         alert('data saved to localStorage')
         save()

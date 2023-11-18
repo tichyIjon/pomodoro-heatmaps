@@ -18,8 +18,8 @@ body {
     background-color: rgba(255, 255, 255, 0);
 }
 
+
 .app {
-    border: 3px solid green;
 }
 
 .main {
@@ -56,7 +56,6 @@ body {
 
 .list-item {
     text-align: center;
-    border: 3px solid green;
 
     display: flex;
     justify-content: center;
@@ -65,7 +64,7 @@ body {
 
 .yAxis {
     border: 3px solid red;
-    margin-bottom: 65px;
+    margin-bottom: 90px;
 }
 
 .list-yAxis {
@@ -87,5 +86,34 @@ body {
     border: 3px solid black;
 }
 
+/* block colors */
+
+.blockColor {
+    background-color: #66414a;
+}
+
+.blockColor1 {
+    background-color: #80525d;
+}
+
+.blockColor2 {
+    background-color: #996270;
+}
+
+.blockColor3 {
+    background-color: #b37282;
+}
+
+.blockColor4 {
+    background-color: #cc8395;
+}
+
+.blockColor5 {
+    background-color: #e693a8;
+}
+
+.blockColor6 {
+    background-color: #fffeba;
+}
 
 

@@ -41,7 +41,6 @@ for (let i = 25; i > 0; i -= 1) {
   listYaxis.append(li)
 }
 
-
 // function for column selecting
 function selectColumn(column) {
     let upperBound = column + 721; 
@@ -72,6 +71,7 @@ function uncolorDiv(column, columnsUncoloredDivs) {
           columnsUncoloredDivs[columnKey] += 1;
           let sqr = document.querySelector(`.sqr${lowestDivIndex}`);
           sqr.style.backgroundColor = 'white';
+          totalPomodoros -= 1;
       }
   }
 }
@@ -85,8 +85,17 @@ function colorDiv(column, columnsUncoloredDivs) {
             columnsUncoloredDivs[columnKey] -= 1;
             let sqr = document.querySelector(`.sqr${lowestDivIndex}`);
             sqr.style.backgroundColor = 'coral';
+            totalPomodoros += 1;
         }
     }
+}
+
+// calculate how much hours have you worked in this month
+let totalPomodoros = 0;
+function calculateHours() {
+    let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
+    let totalHoursDisplay = document.querySelector('.total-hours')
+    totalHoursDisplay.textContent = `${totalHours}`
 }
 
 // function to save data in browser localStorage
@@ -108,6 +117,7 @@ function colorOnLoad(columnsUncoloredDivs) {
             for (let i = highestColoredDivIndex; i <= lowestColoredDivIndex; i += 30) {
                 let sqr = document.querySelector(`.sqr${i}`);
                 sqr.style.backgroundColor = 'coral';
+                totalPomodoros += 1;
             }
         }
     }
@@ -134,10 +144,12 @@ document.addEventListener('keydown',(event)=> {
         if (selectedColumn < 29) {
             selectedColumn += 1;
             selectColumn(selectedColumn)
+            calculateHours()
         } 
     } else if (event.key === 'Enter') {
         if (selectedColumn !== -1) {
             colorDiv(selectedColumn, columnsUncoloredDivs);
+            calculateHours()
         }
         save()
     } else if (event.key === 'Backspace') {
@@ -150,5 +162,6 @@ document.addEventListener('keydown',(event)=> {
         save()
     } else if (event.key === 'l') {
         load()
+        
     }
 })

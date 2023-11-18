@@ -1,0 +1,60 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app {
+    border: 3px solid green;
+}
+
+.main {
+    display: flex;
+
+    border: 3px solid black;
+    color: rgba(163, 163, 163, 0.39);
+    margin-top: 10px;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    height: 700px;
+    width: 1600px;
+}
+
+.sqr {
+    transition: all 0.07s linear;
+}
+
+.xAxis {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.list {
+    display: flex;
+    list-style-type: none;
+}
+
+.list-item {
+    text-align: center;
+}
+
+.yAxis {
+    border: 3px solid red;
+    width: 50px;
+}

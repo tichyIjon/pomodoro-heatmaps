@@ -27,7 +27,7 @@ for (let i = 1; i <= 30; i++) {
 
 // yAxis label generation
 let listYaxis = document.querySelector('.list-yAxis')
-for (let i = 1; i <= 25; i++) {
+for (let i = 25; i > 0; i -= 1) {
   let li = document.createElement('li')
   li.setAttribute('class',`list-item li${i}`)
   li.setAttribute('style',`width: ${sqrWidth}px; height: ${sqrHeight}px;`)

@@ -53,15 +53,24 @@ for (let i = 0; i < 30; i++) {
 }
 
 function uncolorDiv(column, columnsUncoloredDivs) {
+
   if (column >= 0 && column < 30) {
       let columnKey = `column${column}UnColoredDivs`;
 
       if (columnsUncoloredDivs[columnKey] > 0) {
+
           let lowestDivIndex = column + (30 * columnsUncoloredDivs[columnKey]) - 30;
-          columnsUncoloredDivs[columnKey] += 1;
+          if (columnsUncoloredDivs[columnKey] < 25) {
+            columnsUncoloredDivs[columnKey] += 1;
+          }
           let sqr = document.querySelector(`.sqr${lowestDivIndex}`);
-          sqr.style.backgroundColor = 'white';
-          totalPomodoros -= 1;
+            sqr.classList.remove('blockColor')
+            sqr.classList.remove('blockColor1')
+            sqr.classList.remove('blockColor2')
+            sqr.classList.remove('blockColor3')
+            sqr.classList.remove('blockColor4')
+            sqr.classList.remove('blockColor5')
+            sqr.classList.remove('blockColor6')
       }
   }
 }
@@ -88,14 +97,16 @@ function colorDiv(column, columnsUncoloredDivs) {
             } else if (columnsUncoloredDivs[columnKey] < 1) {
                 sqr.classList.add('blockColor6')
             }
-            totalPomodoros += 1;
         }
     }
 }
 
 // calculate how much hours have you worked in this month
-let totalPomodoros = 0;
 function calculateHours() {
+
+    logColors(colorLog)
+    let totalPomodoros = Object.keys(colorLog).length
+
     let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
     let totalHoursDisplay = document.querySelector('.total-hours')
     totalHoursDisplay.textContent = `${totalHours}`
@@ -103,8 +114,7 @@ function calculateHours() {
 
 // function to save data in browser localStorage
 let colorLog = {}
-function save() {
-
+function logColors(colorLog) {
     for (let i = 0; i <= 750; i++) {
         if($(`.sqr${i}`).hasClass('blockColor')) {
             colorLog[`.sqr${i}`] = "blockColor";
@@ -129,6 +139,11 @@ function save() {
 
         }
     }
+}
+
+function save() {
+
+    logColors(colorLog)
 
     let colorLog_serialized = JSON.stringify(colorLog)
     localStorage.setItem('colorLog',colorLog_serialized)
@@ -208,7 +223,6 @@ document.addEventListener('keydown',(event)=> {
         if (selectedColumn < 29) {
             selectedColumn += 1;
             selectColumn(selectedColumn)
-            calculateHours()
         } 
     } else if (event.key === 'Enter') {
         if (selectedColumn !== -1) {
@@ -216,17 +230,18 @@ document.addEventListener('keydown',(event)=> {
             calculateHours()
         }
     } else if (event.key === 'Backspace') {
-      if (selectedColumn !== -1) {
           uncolorDiv(selectedColumn, columnsUncoloredDivs);
-      }
+          calculateHours()
     } else if (event.key === 's') {
         alert('data saved to localStorage')
         save()
     } else if (event.key === 'l') {
         load()   
+        calculateHours()
     } else if (event.key === 'f') {
         goFullscreen()
     } else if (event.key === 'c') {
         gridClear()
+        calculateHours()
     }
 })

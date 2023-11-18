@@ -25,6 +25,12 @@ for (let i = 1; i <= 30; i++) {
   list.append(li)
 }
 
+// current month label generation
+let xAxisLabel = document.querySelector('.xAxis-title') 
+let currentMonth = new Date().getMonth()
+let currentYear = new Date().getFullYear()
+xAxisLabel.textContent = `days of ${currentMonth}/${currentYear}`
+
 // yAxis label generation
 let listYaxis = document.querySelector('.list-yAxis')
 for (let i = 25; i > 0; i -= 1) {

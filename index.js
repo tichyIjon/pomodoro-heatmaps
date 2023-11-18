@@ -83,31 +83,66 @@ function colorDiv(column, columnsUncoloredDivs) {
     }
 }
 
+// function to save data in browser localStorage
+function save() {
+    let columnsUncoloredDivs_serialized = JSON.stringify(columnsUncoloredDivs)
+    localStorage.setItem('columnsUncoloredDivs',columnsUncoloredDivs_serialized)
+    console.log('data saved to localStorage')
+}
+
+// functions to load data from browser localStorage
+
+function colorOnLoad(columnsUncoloredDivs) {
+    let columnKey;
+    for (let i = 0; i <= 30; i++ ) {
+        columnKey = `column${i}UnColoredDivs`
+        if (columnsUncoloredDivs[columnKey] !== 25) {
+            let lowestColoredDivIndex = i + 720;
+            let highestColoredDivIndex = lowestColoredDivIndex - ((24 - columnsUncoloredDivs[columnKey]) * 30)
+            for (let i = highestColoredDivIndex; i <= lowestColoredDivIndex; i += 30) {
+                let sqr = document.querySelector(`.sqr${i}`);
+                sqr.style.backgroundColor = 'coral';
+            }
+        }
+    }
+}
+
+function load() {
+    let columnsUncoloredDivs_deserialized = JSON.parse(localStorage.getItem('columnsUncoloredDivs'))
+    columnsUncoloredDivs = columnsUncoloredDivs_deserialized
+
+    colorOnLoad(columnsUncoloredDivs)
+    alert('data loaded from localStorage')
+}
+
+
 // keyboard controls
 let selectedColumn = -1;
 document.addEventListener('keydown',(event)=> {
-    console.log(event.key)
     if (event.key === 'a') {
         if (selectedColumn > 0) {
-            console.log(selectedColumn)
             selectedColumn -= 1;
             selectColumn(selectedColumn)
-            console.log(selectedColumn)
         }
     } else if (event.key === 'd') {
         if (selectedColumn < 29) {
-            console.log(selectedColumn)
             selectedColumn += 1;
             selectColumn(selectedColumn)
-            console.log(selectedColumn)
         } 
     } else if (event.key === 'Enter') {
         if (selectedColumn !== -1) {
             colorDiv(selectedColumn, columnsUncoloredDivs);
         }
+        save()
     } else if (event.key === 'Backspace') {
       if (selectedColumn !== -1) {
           uncolorDiv(selectedColumn, columnsUncoloredDivs);
       }
+      save()
+    } else if (event.key === 's') {
+        alert('data saved to localStorage')
+        save()
+    } else if (event.key === 'l') {
+        load()
     }
 })

@@ -25,7 +25,9 @@ body {
 
     border: 3px solid #ebbdb2;
     color: rgba(163, 163, 163, 0.39);
-    margin-top: 10px;
+    margin-top: 50px;
+    box-shadow: 12px 12px 0px 0px rgba(66, 68, 90, 1);
+
 }
 
 .container1 {
@@ -73,6 +75,8 @@ body {
 .coding-hours {
     margin-top: 20px;
     color: #bdae93;
+    text-shadow: 5px 5px 0px rgba(66, 68, 90, 1);
+
 }
 
 .total-hours {

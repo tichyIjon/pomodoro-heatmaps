@@ -3,7 +3,7 @@ let cnt1 = document.querySelector('.container1');
 // color variables
 
 let columnSelectorColor = 'red'
-let gridLinesColor = 'black'
+let gridLinesColor = '#928374'
 
 // grid dimensions
 let contHeight = 700;
@@ -16,7 +16,7 @@ let sqrWidth = contWidth / 30;
 for (let i = 0; i < 750; i++) {
     let square = document.createElement('div')
     square.setAttribute('class',`sqr sqr${i}`)
-    square.setAttribute('style',`border: 1px dotted black; height: ${sqrHeight}px; width: ${sqrWidth}px;`)
+    square.setAttribute('style',` height: ${sqrHeight}px; width: ${sqrWidth}px;`)
     cnt1.append(square)
 }
 
@@ -42,12 +42,13 @@ function selectColumn(column) {
 
     for (let i = 0; i < 750; i ++) {
       let sqr = document.querySelector(`.sqr${i}`) 
-      sqr.style.border = `1px dotted ${gridLinesColor}`;
+      sqr.style.border = `none`;
     }
 
     for (let i = column; i <= upperBound; i += 30) {
       let sqr = document.querySelector(`.sqr${i}`)
-      sqr.style.border = `1px solid ${columnSelectorColor}`;
+      sqr.style.borderLeft = `3px solid #ebbdb2`;
+      sqr.style.borderRight = `3px solid #ebbdb2`;
     }
 }
 

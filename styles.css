@@ -12,10 +12,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #282828;
+    font-family: 'Source Code Pro', monospace;
 }
 
 :fullscreen, ::backdrop {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: #282828;
 }
 
 
@@ -25,7 +27,7 @@ body {
 .main {
     display: flex;
 
-    border: 3px solid black;
+    border: 3px solid #ebbdb2;
     color: rgba(163, 163, 163, 0.39);
     margin-top: 10px;
 }
@@ -52,6 +54,8 @@ body {
 .list-xAxis {
     display: flex;
     list-style-type: none;
+    margin-top: 10px;
+    color: #ebbdb2;
 }
 
 .list-item {
@@ -62,54 +66,56 @@ body {
     align-items: center;
 }
 
-.list-yAxis {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-}
-
 .xAxis-title {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     margin-top: 20px;
+    color: #bdae93;
+    display: none;
 }
 
 .coding-hours {
     margin-top: 20px;
+    color: #bdae93;
+}
+
+.total-hours {
+    color: #8ec07c;
 }
 
 footer {
     margin: 20px;
+    color: #83a598;
 }
 
 /* block colors */
 
 .blockColor {
-    background-color: #66414a;
+    background-color: #3d4d4d;
 }
 
 .blockColor1 {
-    background-color: #80525d;
+    background-color: #516666;
 }
 
 .blockColor2 {
-    background-color: #996270;
+    background-color: #658080;
 }
 
 .blockColor3 {
-    background-color: #b37282;
+    background-color: #799999;
 }
 
 .blockColor4 {
-    background-color: #cc8395;
+    background-color: #8db3b3;
 }
 
 .blockColor5 {
-    background-color: #e693a8;
+    background-color: #a1cccc;
 }
 
 .blockColor6 {
-    background-color: #fffeba;
+    background-color: #b5e6e6;
 }
 
 

@@ -16,13 +16,23 @@ for (let i = 0; i < 750; i++) {
 }
 
 // xAxis label generation
-let list = document.querySelector('.list')
+let list = document.querySelector('.list-xAxis')
 for (let i = 1; i <= 30; i++) {
   let li = document.createElement('li')
   li.setAttribute('class',`list-item li${i}`)
-  li.setAttribute('style',`width: ${sqrWidth}px; height: ${sqrHeight}px; margin-top: 10px;`)
+  li.setAttribute('style',`width: ${sqrWidth}px; height: ${sqrHeight}px;`)
   li.textContent = `${i}`
   list.append(li)
+}
+
+// yAxis label generation
+let listYaxis = document.querySelector('.list-yAxis')
+for (let i = 1; i <= 25; i++) {
+  let li = document.createElement('li')
+  li.setAttribute('class',`list-item li${i}`)
+  li.setAttribute('style',`width: ${sqrWidth}px; height: ${sqrHeight}px;`)
+  li.textContent = `${i}`
+  listYaxis.append(li)
 }
 
 

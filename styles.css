@@ -45,16 +45,31 @@ body {
     justify-content: space-evenly;
 }
 
-.list {
+.list-xAxis {
     display: flex;
     list-style-type: none;
 }
 
 .list-item {
     text-align: center;
+    border: 3px solid green;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .yAxis {
     border: 3px solid red;
-    width: 50px;
+    margin-bottom: 25px;
 }
+
+.list-yAxis {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+
+
+

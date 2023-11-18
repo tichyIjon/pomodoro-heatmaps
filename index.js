@@ -101,6 +101,12 @@ function calculateHours() {
     totalHoursDisplay.textContent = `${totalHours}`
 }
 
+// current month label generation
+let month = document.querySelector('.month') 
+let currentMonth = new Date().getMonth()
+let currentYear = new Date().getFullYear()
+month.textContent = `${currentMonth}/${currentYear}`
+
 // function to save data in browser localStorage
 let colorLog = {}
 function save() {
@@ -192,6 +198,9 @@ function goFullscreen() {
 
 // clear grid function
 function gridClear() {
+    window.onbeforeunload = function(event) {
+    return confirm();
+};
     document. location. reload() 
 }
 

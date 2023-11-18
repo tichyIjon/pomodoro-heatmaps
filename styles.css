@@ -61,7 +61,7 @@ body {
 
 .yAxis {
     border: 3px solid red;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 }
 
 .list-yAxis {
@@ -70,6 +70,18 @@ body {
     list-style-type: none;
 }
 
+.yAxis-title {
+    border: 3px solid black;
+    transform: rotate(-90deg);
+    height: 30px;
+    margin-right: -50px;
+}
+
+.xAxis-title {
+    display: flex;
+    justify-content: center;
+    border: 3px solid black;
+}
 
 
 

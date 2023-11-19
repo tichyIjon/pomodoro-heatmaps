@@ -219,37 +219,108 @@ function gridClear() {
     document. location. reload() 
 }
 
+// keypress animations
+function pressAnimationDown(key) {
+    key.style.transition = 'all 0.05s linear'
+    key.style.backgroundColor = '#799999'
+    key.style.marginLeft = '25px'
+    key.style.marginTop = '5px'
+    key.style.boxShadow = '4px 4px 0px 0px rgba(66, 68, 90, 1)'
+}
+
+function pressAnimationUp(key) {
+    key.style.transition = 'all 0.1s linear'
+    key.style.backgroundColor = '#282828'
+    key.style.marginLeft = '20px'
+    key.style.marginTop = '0px'
+    key.style.boxShadow = '8px 8px 0px 0px rgba(66, 68, 90, 1)'
+}
+
 // keyboard controls
 let selectedColumn = -1;
-document.addEventListener('keydown',(event)=> {
+document.addEventListener('keydown',(event) => {
     if (event.key === 'a') {
+        let key = document.querySelector('.a-button')
+        pressAnimationDown(key)
+
         if (selectedColumn > 0) {
             selectedColumn -= 1;
             selectColumn(selectedColumn)
         }
+
     } else if (event.key === 'd') {
+        let key = document.querySelector('.d-button')
+        pressAnimationDown(key)
+
         if (selectedColumn < 29) {
             selectedColumn += 1;
             selectColumn(selectedColumn)
         } 
     } else if (event.key === 'Enter') {
+        let key = document.querySelector('.enter-button')
+        pressAnimationDown(key)
+
         if (selectedColumn !== -1) {
             colorDiv(selectedColumn, columnsUncoloredDivs);
             calculateHours()
         }
     } else if (event.key === 'Backspace') {
-          uncolorDiv(selectedColumn, columnsUncoloredDivs);
-          calculateHours()
+        let key = document.querySelector('.bcksp-button')
+        pressAnimationDown(key)
+
+        uncolorDiv(selectedColumn, columnsUncoloredDivs);
+        calculateHours()
     } else if (event.key === 's') {
+        let key = document.querySelector('.s-button')
+        pressAnimationDown(key)
+
         alert('data saved to localStorage')
         save()
     } else if (event.key === 'l') {
+        let key = document.querySelector('.l-button')
+        pressAnimationDown(key)
+
         load()   
         calculateHours()
     } else if (event.key === 'f') {
+        let key = document.querySelector('.f-button')
+        pressAnimationDown(key)
+
         goFullscreen()
     } else if (event.key === 'c') {
+        let key = document.querySelector('.c-button')
+        pressAnimationDown(key)
+
         gridClear()
         calculateHours()
     }
+
+    //keypress animations
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'a') {
+            let key = document.querySelector('.a-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'd') {
+            let key = document.querySelector('.d-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'Enter') {
+            let key = document.querySelector('.enter-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'Backspace') {
+            let key = document.querySelector('.bcksp-button')
+            pressAnimationUp(key)
+        } else if (event.key === 's') {
+            let key = document.querySelector('.s-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'l') {
+            let key = document.querySelector('.l-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'f') {
+            let key = document.querySelector('.f-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'c') {
+            let key = document.querySelector('.c-button')
+            pressAnimationUp(key)
+        }
+    })
 })

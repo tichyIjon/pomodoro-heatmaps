@@ -28,6 +28,7 @@ body {
     margin-top: 30px;
     box-shadow: 12px 12px 0px 0px rgba(66, 68, 90, 1);
 
+
 }
 
 .container1 {
@@ -36,6 +37,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
 
+    position: relative;
     height: 700px;
     width: 1600px;
 }
@@ -98,6 +100,8 @@ body {
     position: absolute;
     padding-left: 10px;
     box-shadow: 8px 8px 0px 0px rgba(66, 68, 90, 1);
+    /* color: rgba(121, 153, 153, 0.541) */
+
     color: #bdae93;
 
 }
@@ -186,4 +190,18 @@ footer {
     background-color: #b5e6e6;
 }
 
+/* alert hiding */
+
+.alert {
+    animation: hideAlert 0s ease-in 2s forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hideAlert {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
 

@@ -1,4 +1,7 @@
 let cnt1 = document.querySelector('.container1');
+window.onbeforeunload = function(event) {
+    return confirm();
+}
 
 // color variables
 
@@ -203,7 +206,6 @@ function load() {
     colorLog = colorLog_deserialized
 
     colorOnLoad()
-    alert('data loaded from localStorage')
 }
 
 // fullscreen option
@@ -234,6 +236,15 @@ function pressAnimationUp(key) {
     key.style.marginLeft = '20px'
     key.style.marginTop = '0px'
     key.style.boxShadow = '8px 8px 0px 0px rgba(66, 68, 90, 1)'
+}
+
+function showAlert(alertText) {
+    let cnt = document.querySelector('.container1')
+    let alert = document.createElement('div')
+    alert.textContent = alertText
+    alert.classList.add('alert')
+    alert.setAttribute('style','background-color: rgba(141, 179, 179, 0.5); position: absolute; right: 50px; bottom: 50px; font-size: 2rem; color: rgba(255, 255, 255, 0.7) ')
+    cnt.append(alert)
 }
 
 // keyboard controls
@@ -274,14 +285,15 @@ document.addEventListener('keydown',(event) => {
         let key = document.querySelector('.s-button')
         pressAnimationDown(key)
 
-        alert('data saved to localStorage')
         save()
+        showAlert('data saved to localStorage')
     } else if (event.key === 'l') {
         let key = document.querySelector('.l-button')
         pressAnimationDown(key)
 
         load()   
         calculateHours()
+        showAlert('data loaded from localStorage')
     } else if (event.key === 'f') {
         let key = document.querySelector('.f-button')
         pressAnimationDown(key)

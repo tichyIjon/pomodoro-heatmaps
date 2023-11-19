@@ -106,7 +106,7 @@ body {
 
 }
 
-.a-button, .d-button, .s-button, .l-button, .c-button, .f-button {
+.a-button, .d-button, .s-button, .l-button, .f-button {
     width: 60px;
 }
 
@@ -136,12 +136,8 @@ body {
     left: 530px;
 }
 
-.c-button {
-    left: 610px;
-}
-
 .f-button {
-    left: 690px;
+    left: 610px;
 }
 
 

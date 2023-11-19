@@ -213,14 +213,6 @@ function goFullscreen() {
     document.body.requestFullscreen();
 }
 
-// clear grid function
-function gridClear() {
-    window.onbeforeunload = function(event) {
-    return confirm();
-};
-    document. location. reload() 
-}
-
 // keypress animations
 function pressAnimationDown(key) {
     key.style.transition = 'all 0.05s linear'
@@ -299,13 +291,7 @@ document.addEventListener('keydown',(event) => {
         pressAnimationDown(key)
 
         goFullscreen()
-    } else if (event.key === 'c') {
-        let key = document.querySelector('.c-button')
-        pressAnimationDown(key)
-
-        gridClear()
-        calculateHours()
-    }
+    } 
 
     //keypress animations
     document.addEventListener('keyup', (event) => {
@@ -330,9 +316,6 @@ document.addEventListener('keydown',(event) => {
         } else if (event.key === 'f') {
             let key = document.querySelector('.f-button')
             pressAnimationUp(key)
-        } else if (event.key === 'c') {
-            let key = document.querySelector('.c-button')
-            pressAnimationUp(key)
-        }
+        } 
     })
 })

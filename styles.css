@@ -79,15 +79,17 @@ body {
     align-items: center;
     margin-top: 30px;
 
+    position: relative;
 }
 
 .buttons {
     display: flex;
     position: relative;
-    margin-left: 900px;
+    margin-left: 820px;
     margin-bottom: 20px;
 
     border: 5px solid #ebbdb2;
+
 }
 
 .buttons > div {
@@ -106,7 +108,7 @@ body {
 
 }
 
-.a-button, .d-button, .s-button, .l-button, .f-button {
+.a-button, .d-button, .s-button, .l-button, .f-button, .c-button {
     width: 60px;
 }
 
@@ -140,15 +142,36 @@ body {
     left: 610px;
 }
 
+.c-button {
+    left: 690px;
+}
+
 
 .coding-hours {
     color: #bdae93;
     text-shadow: 5px 5px 0px rgba(66, 68, 90, 1);
     position: absolute;
-
 }
+
+.coded-hours {
+    display: none;
+    position: absolute;
+    color: #bdae93;
+    bottom: 715px;
+    left: 20px;
+    background-color: rgba(165, 165, 165, 0.5); 
+    font-size: 2rem; 
+    color: rgba(0, 0, 0, 0.7) 
+}
+
 .total-hours {
-    color: #8ec07c;
+    color: #ff7979;
+    
+}
+
+.total-hours2 {
+    color: #b35656;
+    
 }
 
 footer {
@@ -193,11 +216,18 @@ footer {
     animation-fill-mode: forwards;
 }
 
+
 @keyframes hideAlert {
     to {
         width:0;
         height:0;
         overflow:hidden;
     }
+}
+
+/* hiding elements in capture mode */
+
+.hide {
+    display: none;
 }
 

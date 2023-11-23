@@ -105,10 +105,13 @@ function colorDiv(column, columnsUncoloredDivs) {
 }
 
 // current month label generation
-let month = document.querySelector('.month') 
+let month1 = document.querySelector('.month1') 
 let currentMonth = new Date().getMonth()
 let currentYear = new Date().getFullYear()
-month.textContent = `${currentMonth}/${currentYear}`
+month1.textContent = `${currentMonth}/${currentYear}`
+
+let month2 = document.querySelector('.month2') 
+month2.textContent = `${currentMonth}/${currentYear}`
 
 // calculate how much hours have you worked in this month
 function calculateHours() {
@@ -118,6 +121,16 @@ function calculateHours() {
 
     let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
     let totalHoursDisplay = document.querySelector('.total-hours')
+    totalHoursDisplay.textContent = `${totalHours}`
+}
+
+function calculateHours2() {
+
+    logColors(colorLog)
+    let totalPomodoros = Object.keys(colorLog).length
+
+    let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
+    let totalHoursDisplay = document.querySelector('.total-hours2')
     totalHoursDisplay.textContent = `${totalHours}`
 }
 
@@ -239,6 +252,58 @@ function showAlert(alertText) {
     cnt.append(alert)
 }
 
+let captureMode = false;
+function capture() {
+    let body = document.querySelector('body')
+    let main = document.querySelector('.main')
+    let hoursDown = document.querySelector('.coding-hours')
+    let footer = document.querySelector('footer')
+    let codedHours = document.querySelector('.coded-hours')
+    let total = document.querySelector('.total-hours')
+
+    let buttons = document.querySelector('.buttons')
+
+
+    if (captureMode === true) {
+        captureMode = false
+
+        body.setAttribute('style','background-color: #282828')
+        main.setAttribute('style','border: 3px solid #ebbdb2')
+        hoursDown.classList.remove('hide')
+        footer.classList.remove('hide')
+        buttons.classList.remove('hide')
+
+        codedHours.setAttribute('style', 'display: none')
+        total.setAttribute('style','color: #ff5858;')
+
+        for (let i = 1; i < 31; i++) {
+            let day = document.querySelector(`.li${i}`)
+            day.setAttribute('style', `color: #ebbdb2; width: ${sqrWidth}px; height: ${sqrHeight}px; `)
+        }
+
+
+    } else if (captureMode === false) {
+        captureMode = true;
+
+        body.setAttribute('style','background-color: white')
+        main.setAttribute('style','border: 3px solid #3d4d4d')
+        hoursDown.classList.add('hide')
+        footer.classList.add('hide')
+        buttons.classList.add('hide')
+
+        calculateHours2()
+        codedHours.setAttribute('style', 'display: flex')
+        total.setAttribute('style','color: #ff5858;')
+
+        for (let i = 1; i < 31; i++) {
+            let day = document.querySelector(`.li${i}`)
+            day.setAttribute('style', `color: black; width: ${sqrWidth}px; height: ${sqrHeight}px; `)
+        }
+
+
+    }
+} 
+
 // keyboard controls
 let selectedColumn = -1;
 document.addEventListener('keydown',(event) => {
@@ -291,7 +356,12 @@ document.addEventListener('keydown',(event) => {
         pressAnimationDown(key)
 
         goFullscreen()
-    } 
+    } else if (event.key === 'c') {
+        selectedColumn = -1;
+        calculateHours()
+        capture()
+        selectColumn(selectColumn)
+    }
 
     //keypress animations
     document.addEventListener('keyup', (event) => {

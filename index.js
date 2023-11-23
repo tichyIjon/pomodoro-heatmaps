@@ -1,4 +1,7 @@
 let cnt1 = document.querySelector('.container1');
+window.onbeforeunload = function(event) {
+    return confirm();
+}
 
 // color variables
 
@@ -101,6 +104,15 @@ function colorDiv(column, columnsUncoloredDivs) {
     }
 }
 
+// current month label generation
+let month1 = document.querySelector('.month1') 
+let currentMonth = new Date().getMonth()
+let currentYear = new Date().getFullYear()
+month1.textContent = `${currentMonth}/${currentYear}`
+
+let month2 = document.querySelector('.month2') 
+month2.textContent = `${currentMonth}/${currentYear}`
+
 // calculate how much hours have you worked in this month
 function calculateHours() {
 
@@ -109,6 +121,16 @@ function calculateHours() {
 
     let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
     let totalHoursDisplay = document.querySelector('.total-hours')
+    totalHoursDisplay.textContent = `${totalHours}`
+}
+
+function calculateHours2() {
+
+    logColors(colorLog)
+    let totalPomodoros = Object.keys(colorLog).length
+
+    let totalHours = Math.round(((totalPomodoros * 25) / 60) * 10) / 10
+    let totalHoursDisplay = document.querySelector('.total-hours2')
     totalHoursDisplay.textContent = `${totalHours}`
 }
 
@@ -197,7 +219,6 @@ function load() {
     colorLog = colorLog_deserialized
 
     colorOnLoad()
-    alert('data loaded from localStorage')
 }
 
 // fullscreen option
@@ -205,43 +226,166 @@ function goFullscreen() {
     document.body.requestFullscreen();
 }
 
-// clear grid function
-function gridClear() {
-    document. location. reload() 
+// keypress animations
+function pressAnimationDown(key) {
+    key.style.transition = 'all 0.05s linear'
+    key.style.backgroundColor = '#799999'
+    key.style.marginLeft = '25px'
+    key.style.marginTop = '5px'
+    key.style.boxShadow = '4px 4px 0px 0px rgba(66, 68, 90, 1)'
 }
 
+function pressAnimationUp(key) {
+    key.style.transition = 'all 0.1s linear'
+    key.style.backgroundColor = '#282828'
+    key.style.marginLeft = '20px'
+    key.style.marginTop = '0px'
+    key.style.boxShadow = '8px 8px 0px 0px rgba(66, 68, 90, 1)'
+}
+
+function showAlert(alertText) {
+    let cnt = document.querySelector('.container1')
+    let alert = document.createElement('div')
+    alert.textContent = alertText
+    alert.classList.add('alert')
+    alert.setAttribute('style','background-color: rgba(141, 179, 179, 0.5); position: absolute; right: 50px; bottom: 50px; font-size: 2rem; color: rgba(255, 255, 255, 0.7) ')
+    cnt.append(alert)
+}
+
+let captureMode = false;
+function capture() {
+    let body = document.querySelector('body')
+    let main = document.querySelector('.main')
+    let hoursDown = document.querySelector('.coding-hours')
+    let footer = document.querySelector('footer')
+    let codedHours = document.querySelector('.coded-hours')
+    let total = document.querySelector('.total-hours')
+
+    let buttons = document.querySelector('.buttons')
+
+
+    if (captureMode === true) {
+        captureMode = false
+
+        body.setAttribute('style','background-color: #282828')
+        main.setAttribute('style','border: 3px solid #ebbdb2')
+        hoursDown.classList.remove('hide')
+        footer.classList.remove('hide')
+        buttons.classList.remove('hide')
+
+        codedHours.setAttribute('style', 'display: none')
+        total.setAttribute('style','color: #ff5858;')
+
+        for (let i = 1; i < 31; i++) {
+            let day = document.querySelector(`.li${i}`)
+            day.setAttribute('style', `color: #ebbdb2; width: ${sqrWidth}px; height: ${sqrHeight}px; `)
+        }
+
+
+    } else if (captureMode === false) {
+        captureMode = true;
+
+        body.setAttribute('style','background-color: white')
+        main.setAttribute('style','border: 3px solid #3d4d4d')
+        hoursDown.classList.add('hide')
+        footer.classList.add('hide')
+        buttons.classList.add('hide')
+
+        calculateHours2()
+        codedHours.setAttribute('style', 'display: flex')
+        total.setAttribute('style','color: #ff5858;')
+
+        for (let i = 1; i < 31; i++) {
+            let day = document.querySelector(`.li${i}`)
+            day.setAttribute('style', `color: black; width: ${sqrWidth}px; height: ${sqrHeight}px; `)
+        }
+
+
+    }
+} 
 
 // keyboard controls
 let selectedColumn = -1;
-document.addEventListener('keydown',(event)=> {
+document.addEventListener('keydown',(event) => {
     if (event.key === 'a') {
+        let key = document.querySelector('.a-button')
+        pressAnimationDown(key)
+
         if (selectedColumn > 0) {
             selectedColumn -= 1;
             selectColumn(selectedColumn)
         }
+
     } else if (event.key === 'd') {
+        let key = document.querySelector('.d-button')
+        pressAnimationDown(key)
+
         if (selectedColumn < 29) {
             selectedColumn += 1;
             selectColumn(selectedColumn)
         } 
     } else if (event.key === 'Enter') {
+        let key = document.querySelector('.enter-button')
+        pressAnimationDown(key)
+
         if (selectedColumn !== -1) {
             colorDiv(selectedColumn, columnsUncoloredDivs);
             calculateHours()
         }
     } else if (event.key === 'Backspace') {
-          uncolorDiv(selectedColumn, columnsUncoloredDivs);
-          calculateHours()
+        let key = document.querySelector('.bcksp-button')
+        pressAnimationDown(key)
+
+        calculateHours()
+        uncolorDiv(selectedColumn, columnsUncoloredDivs);
     } else if (event.key === 's') {
-        alert('data saved to localStorage')
+        let key = document.querySelector('.s-button')
+        pressAnimationDown(key)
+
         save()
+        showAlert('data saved to localStorage')
     } else if (event.key === 'l') {
+        let key = document.querySelector('.l-button')
+        pressAnimationDown(key)
+
         load()   
         calculateHours()
+        showAlert('data loaded from localStorage')
     } else if (event.key === 'f') {
+        let key = document.querySelector('.f-button')
+        pressAnimationDown(key)
+
         goFullscreen()
     } else if (event.key === 'c') {
-        gridClear()
+        selectedColumn = -1;
         calculateHours()
+        capture()
+        selectColumn(selectColumn)
     }
+
+    //keypress animations
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'a') {
+            let key = document.querySelector('.a-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'd') {
+            let key = document.querySelector('.d-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'Enter') {
+            let key = document.querySelector('.enter-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'Backspace') {
+            let key = document.querySelector('.bcksp-button')
+            pressAnimationUp(key)
+        } else if (event.key === 's') {
+            let key = document.querySelector('.s-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'l') {
+            let key = document.querySelector('.l-button')
+            pressAnimationUp(key)
+        } else if (event.key === 'f') {
+            let key = document.querySelector('.f-button')
+            pressAnimationUp(key)
+        } 
+    })
 })
